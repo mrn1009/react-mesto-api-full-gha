@@ -1,0 +1,10 @@
+.content-autorize {
+    margin: 0 auto;
+    max-width: 358px;
+  }
+  
+  @media (max-width: 918px) {
+    .content-autorize {
+      padding: 0 19px;
+    }
+  }

@@ -1,0 +1,16 @@
+.autorize__closed {
+    display: none;
+  }
+  
+  @media (max-width: 550px) {
+    .autorize__closed {
+      display: block;
+      width: 32px;
+      height: 32px;
+      background: url(../../../images/close.svg);
+      background-size: 100%;
+      object-fit: cover;
+      padding: 0;
+      border: none;
+    }
+  }

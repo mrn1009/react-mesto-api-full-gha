@@ -1,0 +1,5 @@
+.autorize__mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

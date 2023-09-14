@@ -1,0 +1,9 @@
+.autorize__wrapper_opened {
+    display: none;
+  }
+  
+  @media (max-width: 550px) {
+    .autorize__wrapper_opened {
+      display: block;
+    }
+  }

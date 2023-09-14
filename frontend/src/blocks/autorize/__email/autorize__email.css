@@ -1,0 +1,13 @@
+.autorize__email {
+  margin-right: 24px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.22;
+  color: white;
+}
+
+@media (max-width: 550px) {
+  .autorize__email {
+    margin: 40px 0 18px;
+  }
+}

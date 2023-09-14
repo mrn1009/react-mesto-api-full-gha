@@ -1,0 +1,21 @@
+.popup__closed {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  right: -40px;
+  top: -40px;
+  background: url(../../../images/close.svg);
+  background-size: 100%;
+  object-fit: cover;
+  padding: 0;
+  border: none;
+}
+
+@media (max-width: 550px) {
+  .popup__closed {
+    width: 20px;
+    height: 20px;
+    top: -36px;
+    right: 0;
+  }
+}

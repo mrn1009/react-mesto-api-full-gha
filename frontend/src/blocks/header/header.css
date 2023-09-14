@@ -1,0 +1,27 @@
+.header {
+  margin: 0 auto;
+  padding-bottom: 41px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba(84, 84, 84, .7);
+  max-width: 880px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 918px) {
+  .header {
+    padding-left: 27px;
+    padding-right: 27px;
+  }
+}
+
+@media (max-width: 550px) {
+  .header {
+    padding-bottom: 31.6px;
+    padding-top: 31.6px;
+    margin-bottom: 42px;
+    border-top: 1px solid rgba(84, 84, 84, .7);
+  }
+}

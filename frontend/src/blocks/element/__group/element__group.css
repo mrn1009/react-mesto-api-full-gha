@@ -1,0 +1,7 @@
+.element__group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    min-height: 40.8px;
+}

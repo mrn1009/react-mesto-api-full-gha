@@ -1,0 +1,7 @@
+.profile__avatar-group {
+    position: relative;
+    border-radius: 50%;
+    background: black;
+    width: 120px;
+    height: 120px;
+  }

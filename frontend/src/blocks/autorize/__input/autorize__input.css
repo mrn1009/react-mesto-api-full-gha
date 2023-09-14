@@ -1,0 +1,13 @@
+.autorize__input {
+  border: none;
+  width: 100%;
+  min-height: 27px;
+  padding: 0;
+  border-bottom: 2px solid white;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.21;
+  margin: 0 auto;
+  background: black;
+  color: white;
+}

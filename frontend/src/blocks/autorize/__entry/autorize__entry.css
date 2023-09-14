@@ -1,0 +1,15 @@
+.autorize__entry {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.22;
+  color: white;
+  text-decoration: none;
+}
+
+@media (max-width: 550px) {
+  .autorize__entry {
+    font-size: 14px;
+    line-height: 1.21;
+
+  }
+}

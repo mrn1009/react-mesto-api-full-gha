@@ -1,0 +1,13 @@
+.autorize__res-text {
+    text-align: center;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 1.20;
+    margin: 0 0 23px;
+  }
+  
+  @media (max-width: 550px) {
+    .autorize__res-text {
+      font-size: 20px;
+    }
+  }

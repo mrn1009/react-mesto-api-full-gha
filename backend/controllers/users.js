@@ -66,8 +66,7 @@ const login = (req, res, next) => {
               expiresIn: '7d',
               httpOnly: true,
               sameSite: true,
-            });
-            res.send({ data: user.toJSON() });
+            }).send({ user });
           } else {
             throw new AuthError('Необходимо авторизоваться');
           }
@@ -82,7 +81,7 @@ const getCurrentUser = (req, res, next) => {
     .orFail(() => {
       throw new NotFoundError('Запрашиваемый пользователь не найден');
     })
-    .then((user) => res.status(200).send({ user }))
+    .then((user) => res.status(200).send(user))
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new BadRequestError('Переданы некорректные данные'));

@@ -19,6 +19,7 @@ import * as auth from '../utils/auth.js';
 import success from '../images/success.svg';
 import error from '../images/error.svg';
 
+
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -43,9 +44,9 @@ function App() {
   React.useEffect(() => {
     if (loggedIn) {
       Promise.all([api.getInitialCards(), api.getUserInfo()])
-      .then(([cardData, res]) => {
+      .then(([cardData, data]) => {
         setCards(cardData);
-        setCurrentUser(res);
+        setCurrentUser(data);
       })
       .catch((err) => {
         console.log(`${err}`);
@@ -57,7 +58,7 @@ function App() {
   function handleRegister (password, email) {
     auth.register(password, email)
       .then(() => {
-        navigate("/sign-in", { replace: true });
+        navigate("/signin", { replace: true });
         handleOpenInfoTooltip();
         setImgResAuth(success);
         setTextResAuth("Вы успешно зарегистрировались!")
@@ -71,15 +72,15 @@ function App() {
   }
 
   //авторизация
-  function handleLogin (password, email) {
+  function handleLogin (password, email) {console.log(loggedIn)
     auth.authorize(password, email)
-      .then((res) => {
-        if (res.token) {
+      .then(() => {
+          localStorage.setItem('loggedIn', true);
           setLoggedIn(true);
+          console.log(loggedIn);
           setUserEmail(email);
-          localStorage.setItem('jwt', res.token);
-          navigate('/', {replace: true});
-        }
+          navigate("/", {replace: true});
+          handleOpenInfoTooltip();
       })
       .catch((err) => {
         console.log(`${err}`);
@@ -91,15 +92,12 @@ function App() {
 
   //проверка токена
   function checkToken () {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      auth.checkToken(jwt)
-        .then((user) => {
-          if (user.data) {
-            setLoggedIn(true);
-            setUserEmail(user.data.email);
-            navigate("/", {replace: true});
-          }
+    if (localStorage.getItem('loggedIn')) {
+      auth.checkToken()
+        .then((user) => {console.log(loggedIn)
+          setLoggedIn(true);
+          setUserEmail(user.email);
+          navigate("/", {replace: true});
         })
         .catch((err) => {
           console.log(`${err}`);
@@ -113,12 +111,12 @@ function App() {
 
   //выход
   function signOut() {
-    localStorage.removeItem('jwt');
-    navigate('/sign-in');
+    localStorage.removeItem('loggedIn');
+    navigate('/signin');
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
     if (!isLiked) {
       api.putLike(card._id)
         .then((cardId) => {
@@ -237,15 +235,15 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Routes>
-          <Route path="/sign-in" element={
+          <Route path="/signin" element={
             <>
-              <Header title="Регистрация" link="/sign-up"/>
+              <Header title="Регистрация" link="/signup"/>
               <Login handleLogin={handleLogin} />
             </>
           } />
-          <Route path="/sign-up" element={
+          <Route path="/signup" element={
             <>
-              <Header title="Войти" link="/sign-in"/>
+              <Header title="Войти" link="/signin"/>
               <Register handleRegister={handleRegister} />
             </>
           } />
@@ -255,7 +253,7 @@ function App() {
                 onClick={signOut}
                 email={userEmail}
                 title="Выйти"
-                link="/sign-up"
+                link="/signup"
                 loggedIn={loggedIn} />
               <ProtectedRoute element={Main}
                 loggedIn={loggedIn}
@@ -269,7 +267,7 @@ function App() {
               <Footer />
             </>
           } />
-          <Route path="*" element={loggedIn ? <Navigate to="/" /> : <Navigate to="/sign-up" />} />
+          <Route path="*" element={loggedIn ? <Navigate to="/" /> : <Navigate to="/signup" />} />
         </Routes>
 
         <EditProfilePopup

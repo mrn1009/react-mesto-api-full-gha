@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs');
 const jsonWebToken = require('jsonwebtoken');
 const User = require('../models/user');
+
+const { NODE_ENV, JWT_SECRET } = process.env;
 const NotFoundError = require('../errors/not-found-err');
 const BadRequestError = require('../errors/bad_request_err');
 const DuplicateError = require('../errors/duplicate_err');
@@ -61,7 +63,7 @@ const login = (req, res, next) => {
       bcrypt.compare(String(password), user.password)
         .then((isValidUser) => {
           if (isValidUser) {
-            const jwt = jsonWebToken.sign({ _id: user._id }, 'SECRET');
+            const jwt = jsonWebToken.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'SECRET');
             res.cookie('jwt', jwt, {
               expiresIn: '7d',
               httpOnly: true,

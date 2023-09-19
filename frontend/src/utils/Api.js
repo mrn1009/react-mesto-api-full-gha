@@ -17,21 +17,23 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  //получение информации о пользователе
+  //метод получения информации о пользователе
   getUserInfo() {
     return this._request(`${this._baseUrl}/users/me`, {
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include'
     })
   }
 
-  //получение карточек
+  //метод получения карточек
   getInitialCards() {
     return this._request(`${this._baseUrl}/cards`, {
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include'
     })
   }
 
-  //изменение данных о пользователе
+  //метод изменения данных о пользователе
   setUserInfo(data) {
     return this._request(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
@@ -39,22 +41,24 @@ class Api {
       body: JSON.stringify({
         name: data.nameUser,
         about: data.jobUser
-      })
+      }),
+      credentials: 'include'
     })
   }
 
-  //изменение аватара
+  //метод изменения аватара
   setUserAvatar(data) {
     return this._request(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
         avatar: data.userAvatar
-      })
+      }),
+      credentials: 'include'
     })
   }
 
-  //добавление карточки
+  //метод добавления карточки
   addCard(data) {
     return this._request(`${this._baseUrl}/cards`, {
       method: 'POST',
@@ -62,41 +66,44 @@ class Api {
       body: JSON.stringify({
         name: data.name,
         link: data.link
-      })
+      }),
+      credentials: 'include'
     })
   }
 
-  //удаление карточки
+  //метод удаления карточки
   deleteCard(cardId) {
     return this._request(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
       headers: this._headers,
+      credentials: 'include'
     })
   };
 
-  //отправка лайка
+  //метод отправки лайка
   putLike(cardId) {
     return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
+      credentials: 'include'
     })
   };
 
-  //снятие лайка
+  //метод снятия лайка
   removeLike(cardId) {
     return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
+      credentials: 'include'
     })
   };
 }
-  
-  const api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-68',
-    headers: {
-      authorization: 'ab8a5103-cafe-4d34-aecd-dfeba40f1516',
-      'Content-Type': 'application/json'
-    }
-  });
-  
-  export default api;
+
+const api = new Api({
+  baseUrl: 'https://api.mrn1009.nomoredomainsrocks.ru',
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
+
+export default api;

@@ -3,9 +3,9 @@ const AuthError = require('../errors/auth_err');
 
 const auth = (req, res, next) => {
   const token = req.cookies.jwt;
+  console.log(token);
   if (!token) {
-    next(new AuthError('Необходимо авторизоваться'));
-    return;
+    throw new AuthError('Необходимо авторизоваться');
   }
   let payload;
   try {

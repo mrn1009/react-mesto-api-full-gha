@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-// require('dotenv').config();
+require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const cors = require('cors');
@@ -18,12 +18,14 @@ app.use(requestLogger);
 app.use(cors({
   credentials: true,
   origin: [
+    'https://api.mrn1009.nomoredomainsrocks.ru',
+    'https://mrn1009.nomoredomainsrocks.ru',
     'http://localhost:3000',
     'http://localhost:3001',
   ],
 }));
 
-// краш-тест сервера
+// краш-тест
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');

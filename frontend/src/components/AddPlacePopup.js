@@ -1,6 +1,6 @@
-import React from 'react';
-import PopupWithForm from './PopupWithForm';
-import { useForm } from '../hooks/useForm';
+import React from "react";
+import PopupWithForm from "./PopupWithForm";
+import { useForm } from "../hooks/useForm";
 
 function AddPlacePopup ({ isOpen, onClose, onAddPlace, isLoading }) {
   const {values, handleChange, setValues} = useForm({});
@@ -64,4 +64,4 @@ function AddPlacePopup ({ isOpen, onClose, onAddPlace, isLoading }) {
   );
 }
 
-export default AddPlacePopup ;
+export default AddPlacePopup;

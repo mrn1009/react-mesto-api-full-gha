@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.122.193
+IP 158.160.122.193
 
 Frontend https://mrn1009.nomoredomainsrocks.ru
 

@@ -35,7 +35,13 @@ const deleteCard = (req, res, next) => {
         throw new AccessDeniedError('Нет прав на удаление карточки');
       }
     })
-    .catch(next);
+    .catch((err) => {
+      if (err.name === 'CastError') {
+        next(new BadRequestError('Переданы некорректные данные'));
+      } else {
+        next(err);
+      }
+    });
 };
 
 // постановка лайка
@@ -46,14 +52,12 @@ const likeCard = (req, res, next) => {
     { new: true },
   )
     .orFail(() => {
-      throw new NotFoundError('Запрашиваемый пользователь не найден');
+      throw new NotFoundError('Карточка не найденa');
     })
     .then((card) => res.status(200).send(card))
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new BadRequestError('Переданы некорректные данные'));
-      } else if (err.message === 'Not Found') {
-        next(new NotFoundError('Передан несуществующий _id карточки'));
       } else {
         next(err);
       }
@@ -68,14 +72,12 @@ const dislikeCard = (req, res, next) => {
     { new: true },
   )
     .orFail(() => {
-      throw new NotFoundError('Запрашиваемый пользователь не найден');
+      throw new NotFoundError('Карточка не найденa');
     })
     .then((card) => res.status(200).send(card))
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new BadRequestError('Переданы некорректные данные'));
-      } else if (err.message === 'Not Found') {
-        next(new NotFoundError('Передан несуществующий _id карточки'));
       } else {
         next(err);
       }

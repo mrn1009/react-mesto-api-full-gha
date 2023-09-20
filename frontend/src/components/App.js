@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Header from './Header';
 import Main from './Main';
@@ -14,11 +14,10 @@ import Login from './Login';
 import Register from './Register';
 import InfoTooltip from './InfoTooltip';
 import ProtectedRoute from './ProtectedRoute';
-import api from '../utils/Api';
+import api from "../utils/Api";
 import * as auth from '../utils/auth.js';
-import success from '../images/success.svg';
-import error from '../images/error.svg';
-
+import success from '../images/success.svg'
+import error from '../images/error.svg'
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
@@ -54,7 +53,7 @@ function App() {
     }
   }, [loggedIn]);
 
-  //регистрация
+  //регистрация пользователя
   function handleRegister (password, email) {
     auth.register(password, email)
       .then(() => {
@@ -71,7 +70,7 @@ function App() {
       })
   }
 
-  //авторизация
+  //авторизация пользователя
   function handleLogin (password, email) {console.log(loggedIn)
     auth.authorize(password, email)
       .then(() => {
@@ -80,7 +79,6 @@ function App() {
           console.log(loggedIn);
           setUserEmail(email);
           navigate("/", {replace: true});
-          handleOpenInfoTooltip();
       })
       .catch((err) => {
         console.log(`${err}`);

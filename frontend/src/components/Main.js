@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
@@ -19,7 +19,7 @@ function Main ({onEditAvatar, onEditProfile, onAddPlace, onCardClick, onCardLike
               onClick={onEditAvatar} />
           </div>
 
-          <div className="profile__info">
+          <div className="profile__intro">
             <h1 className="profile__title">{currentUser.name}</h1>
             <button
               className="profile__edit-button link-hover"

@@ -50,7 +50,7 @@ function Register({ handleRegister  }) {
                 <span className="popup__input-error popup__input-error_autorize" />
             </label>
             <button className="autorize__button link-hover" type="submit" aria-label="Сохранить">Зарегистрироваться</button>
-            <p className="autorize__text">Уже зарегистрированы? <Link to="/sign-in" className="autorize__link link-hover">Войти</Link></p>
+            <p className="autorize__text">Уже зарегистрированы? <Link to="/signin" className="autorize__link link-hover">Войти</Link></p>
         </form>
     </section>
   )

@@ -1,6 +1,6 @@
-import React from 'react';
-import usePopupClose from '../hooks/usePopupClose';
-import PopupWithForm from './PopupWithForm';
+import React from "react";
+import usePopupClose from "../hooks/usePopupClose";
+import PopupWithForm from "./PopupWithForm";
 
 function ConfirmDeleteCard({ isOpen, onClose, isLoading, onDeleteCard, card}) {
 

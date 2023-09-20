@@ -64,4 +64,4 @@ function AddPlacePopup ({ isOpen, onClose, onAddPlace, isLoading }) {
   );
 }
 
-export default AddPlacePopup;
+export default AddPlacePopup ;

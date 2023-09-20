@@ -25,22 +25,22 @@ const createCard = (req, res, next) => {
 // удаление карточки
 const deleteCard = (req, res, next) => {
   Card.findById(req.params.cardId)
-    .orFail(() => {
-      throw new NotFoundError('Передан несуществующий _id карточки');
-    })
     .then((card) => {
-      if (String(card.owner) === req.user._id) {
-        Card.findByIdAndRemove(req.params.cardId).then(() => res.status(200).send(card));
-      } else {
-        throw new AccessDeniedError('Нет прав на удаление карточки');
+      if (!card) {
+        next(new NotFoundError('Передан несуществующий _id карточки'));
       }
-    })
-    .catch((err) => {
-      if (err.name === 'CastError') {
-        next(new BadRequestError('Переданы некорректные данные'));
-      } else {
-        next(err);
+      if (card.owner.toString() !== req.user._id) {
+        next(new AccessDeniedError('Нет прав на удаление карточки'));
       }
+      return Card.findByIdAndRemove(req.params.cardId).then(() => res.status(200).send(card))
+        .orFail(() => new NotFoundError('Передан несуществующий _id карточки'))
+        .catch((err) => {
+          if (err.name === 'CastError') {
+            next(new BadRequestError('Переданы некорректные данные'));
+          } else {
+            next(err);
+          }
+        });
     });
 };
 
